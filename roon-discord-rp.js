@@ -16,14 +16,14 @@ limitations under the License.
 
 "use strict";
 
-var RoonApi = require('node-roon-api'),
+let RoonApi = require('node-roon-api'),
     RoonApiSettings = require('node-roon-api-settings'),
     RoonApiStautus = require('node-roon-api-status'),
     RoonApiTransport = require('node-roon-api-transport'),
     DiscordRPC = require('discord-rpc');
 
-var _core = undefined;
-var _transport = undefined;
+let _core = undefined;
+let _transport = undefined;
 
 const clientId = '464873958232162353';
 const scopes = ['rpc', 'rpc.api', 'messages.read'];
@@ -34,7 +34,7 @@ const rpc = new DiscordRPC.Client({transport: 'ipc'});
 
 rpc.login(clientId, { scopes }).catch(console.error);
 
-var roon = new RoonApi({
+let roon = new RoonApi({
     extension_id: 'com.georlegacy.general.roon-discord-rp',
     display_name: 'Discord Rich Presence',
     display_version: '1.0',
@@ -94,8 +94,8 @@ var roon = new RoonApi({
 
 async function setActivity(line1, line2, songLength, currentSeek) {
 
-    var startTimestamp = (new Date().getTime() / 1000) - currentSeek;
-    var endTimestamp = startTimestamp + songLength;
+    let startTimestamp = (new Date().getTime() / 1000) - currentSeek;
+    let endTimestamp = startTimestamp + songLength;
 
     rpc.setActivity({
         details: line1,
@@ -125,7 +125,7 @@ async function setActivityLoading() {
 
 }
 
-async function setActivityPaused(line1, line2) {
+async setActivityPaused(line1, line2) => {
 
     rpc.setActivity({
         details: '[Paused] ' + line1,
@@ -139,7 +139,7 @@ async function setActivityPaused(line1, line2) {
 
 }
 
-async function setActivityStopped() {
+async setActivityStopped() => {
 
     rpc.setActivity({
         details: 'Not listening',
